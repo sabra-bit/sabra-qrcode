@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>QRCode genrator</title>
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon.ico.jpg')}}">
+    
+    
+  </head>
+  <body>
+    <h1>To get QRcode type and press Enter</h1>
+    <br>
+    
+    <input type="text" id="qr-data" onchange="genration()">
+    <div id="qrcode"></div>
+    <br>
+    <br>
+    <br>
+
+    <form id="login"action ="/scan" method="post">
+      
+            
+        <button type="submit" value="Submit" >Sacn --></button>
+    
+       
+      </div>
+    
+      
+    </form>
+   
+
+  </body>
+  <script type="text/javascript" src="{{ url_for('static',filename ='qrcode.min.js') }}"></script>
+  <script>
+    var qrdata = document.getElementById("qr-data");
+    var qrcode = new QRCode(document.getElementById("qrcode"));
+    function genration(){
+
+        var data = qrdata.value;
+        qrcode.makeCode(data);
+
+        
+    }
+
+</script>
+</html>

@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>QRCode Scanner</title>
+
+    <script type="text/javascript" src="{{ url_for('static',filename ='instascan.min.js') }}"></script>
+    <link rel="shortcut icon" href="{{url_for('static',filename='favicon.ico.jpg')}}">
+
+  </head>
+  <body>
+    <h1 id ="ss">Sabra Scanner</h1>
+
+    <video id="preview"></video>
+
+    <h2><div id ="txtData">data: </div></h2>
+    
+    <script type="text/javascript">
+      let scanner = new Instascan.Scanner({
+        video: document.getElementById('preview')
+      });
+
+      scanner.addListener('scan', function (content) {
+        console.log(content);
+        document.getElementById("txtData").innerHTML += content;
+        scanner.stop();
+        // window.location = 'http://localhost/something/data';
+          // or 
+        //location.replace("https://www.w3schools.com");
+      });
+
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
+  </body>
+</html>
